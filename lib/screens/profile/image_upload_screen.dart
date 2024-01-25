@@ -44,7 +44,6 @@ class ImageUploadScreen extends StatelessWidget {
                   const Text(
                     "รูปโปรไฟล์ของคุณ",
                     style: TextStyle(
-                      color: Colors.black,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
@@ -59,7 +58,9 @@ class ImageUploadScreen extends StatelessWidget {
                           width: 250,
                           height: 300,
                           decoration: BoxDecoration(
-                            color: const Color.fromRGBO(244, 249, 255, 1),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
                               color: const Color.fromRGBO(217, 218, 222, 1),
@@ -80,7 +81,9 @@ class ImageUploadScreen extends StatelessWidget {
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: Color.fromRGBO(4, 94, 228, 1),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                           borderRadius:
                                               BorderRadius.circular(35),
                                           boxShadow: [
@@ -109,10 +112,6 @@ class ImageUploadScreen extends StatelessWidget {
                                       ),
                                       ElevatedButton(
                                         style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  const Color.fromRGBO(
-                                                      255, 222, 168, 1)),
                                           minimumSize:
                                               MaterialStateProperty.all<Size>(
                                                   const Size(225, 35)),
@@ -131,7 +130,6 @@ class ImageUploadScreen extends StatelessWidget {
                                         child: const Text(
                                           'อัพโหลดรูป',
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -188,11 +186,6 @@ class ImageUploadScreen extends StatelessWidget {
                                     _openGallery(context);
                                   },
                                   style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      const Color.fromARGB(0, 34, 82,
-                                          255), // Set the opacity here
-                                    ),
                                     shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
@@ -208,7 +201,6 @@ class ImageUploadScreen extends StatelessWidget {
                                   child: const Text(
                                     'เปลี่ยนรูป',
                                     style: TextStyle(
-                                      color: Colors.white,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -228,7 +220,6 @@ class ImageUploadScreen extends StatelessWidget {
                     text: const TextSpan(
                       text: 'โปรดเลือกรูปที่',
                       style: TextStyle(
-                        color: Colors.black,
                         fontSize: 16,
                         fontFamily: 'NotoSansThai',
                       ),
@@ -236,7 +227,6 @@ class ImageUploadScreen extends StatelessWidget {
                         TextSpan(
                           text: 'แสดงความเป็นตัวตน',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 34, 82, 255),
                             fontSize: 16,
                           ),
                         ),

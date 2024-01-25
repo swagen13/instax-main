@@ -3,9 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:instax/blocs/theme_bloc/theme_bloc.dart';
+import 'package:instax/blocs/theme_bloc/theme_event.dart';
+import 'package:instax/blocs/theme_bloc/theme_state.dart';
 import 'package:instax/providers/temporary_gender_provider.dart';
-import 'package:instax/widget/customButtonCopyWith.dart';
 import 'package:instax/widget/customCheckBox.dart';
+import 'package:instax/widget/switchThemeColor.dart';
+import 'package:instax/widget/customButton.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
@@ -17,13 +21,9 @@ class GenderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                context.read<SignInBloc>().add((const SignOutRequired()));
-              },
-            )
+          centerTitle: true,
+          actions: const [
+            SwitchThemeColor(),
           ],
         ),
         body: BlocBuilder<MyUserBloc, MyUserState>(builder: (context, state) {
@@ -69,30 +69,22 @@ class GenderScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    CustomButton(
-                      onPressed: () {
-                        state.myUser.gender =
-                            temporaryGenderProvider.selectedGender;
-                        context.read<MyUserBloc>().add(UpdateMyUser(
-                            myUser: state.myUser.copyWith(
-                                gender:
-                                    temporaryGenderProvider.selectedGender)));
-                        Navigator.pushNamed(context, '/birthday');
-                      },
-                      text: "ดำเนินการต่อ",
-                      color: const Color.fromRGBO(0, 86, 210, 1),
+                    SizedBox(
+                      width: double.infinity,
+                      child:
+                          CustomButton(text: "ดำเนินการต่อ", onPressed: () {}),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Center(
                       child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/birthday');
+                            Navigator.pushNamed(context, 'birthday');
                           },
                           child: const Text(
                             "ข้ามไปก่อน",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            style: TextStyle(fontSize: 16),
                           )),
                     )
                   ],

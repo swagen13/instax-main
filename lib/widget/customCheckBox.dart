@@ -35,9 +35,7 @@ class CustomCheckbox extends StatelessWidget {
                   Text(
                     value,
                     style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   Container(
@@ -45,12 +43,12 @@ class CustomCheckbox extends StatelessWidget {
                     width: 30,
                     decoration: BoxDecoration(
                       color: selectedValue == value
-                          ? Color.fromRGBO(0, 86, 210, 1)
+                          ? Theme.of(context).colorScheme.primary
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
                         color: selectedValue == value
-                            ? Color.fromRGBO(0, 86, 210, 1)
+                            ? Theme.of(context).colorScheme.primary
                             : const Color.fromARGB(255, 207, 207, 207),
                         width: 2,
                       ),

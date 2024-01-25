@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:instax/blocs/Job_post_bloc/job_post_event.dart';
 import 'package:instax/blocs/Job_post_bloc/job_post_state.dart';
+import 'package:instax/blocs/job_post_bloc/job_post_event.dart';
 import 'package:job_post_repository/job_post_repository.dart';
 
 class JobPostBloc extends Bloc<JobPostEvent, JobPostState> {
   final JobPostRepository _jobPostRepository = FirebaseJobPostRepository();
 
   JobPostBloc() : super(JobPostState()) {
-    on<GetJobPosts>((event, emit) async {
+    on<JobPostsGetRequested>((event, emit) async {
       try {
         // check if the subJobId is already selected
         if (state.jobPosts

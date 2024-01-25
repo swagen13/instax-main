@@ -99,7 +99,6 @@ class WorkTypeScreen extends StatelessWidget {
                                           Text(
                                             job.jobName,
                                             style: const TextStyle(
-                                              color: Colors.white,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),

@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/Job_post_bloc/job_post_bloc.dart';
 import 'package:instax/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:instax/blocs/image_bloc/image_bloc.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_bloc.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_event.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
+import 'package:instax/blocs/otp_bloc/otp_bloc.dart';
+import 'package:instax/blocs/phone_number_bloc/phone_number_bloc.dart';
 import 'package:instax/blocs/post_bloc/post_bloc.dart';
 import 'package:instax/blocs/post_bloc/post_event.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:instax/blocs/theme_bloc/theme_bloc.dart';
+import 'package:instax/blocs/theme_bloc/theme_state.dart';
 import 'package:instax/providers/temporary_gender_provider.dart';
 import 'package:instax/providers/temporary_job_selected_provider.dart';
-import 'package:instax/screens/authentication/onboard_screen.dart';
+import 'package:instax/providers/temporary_otp_provider.dart';
+import 'package:instax/screens/authentication/otp_screen.dart';
+import 'package:instax/screens/authentication/phone_verify.dart';
 import 'package:instax/screens/authentication/sign_in_screen.dart';
-import 'package:instax/screens/profile/birthday_screen.dart';
 import 'package:instax/screens/home/home_screen.dart';
 import 'package:instax/screens/home/post_screen.dart';
+import 'package:instax/screens/profile/birthday_screen.dart';
 import 'package:instax/screens/profile/display_name_screen.dart';
 import 'package:instax/screens/profile/favorite_job.dart';
 import 'package:instax/screens/profile/favorite_works_selection_screen.dart';
@@ -31,23 +36,29 @@ class MyAppView extends StatelessWidget {
 
   final routes = {
     // Genders route
-    // '/gender': (context) => BlocProvider<MyUserBloc>(
-    //       create: (context) => MyUserBloc(
-    //           myUserRepository:
-    //               context.read<AuthenticationBloc>().userRepository)
-    //         ..add(GetMyUser(
-    //             myUserId: context.read<AuthenticationBloc>().state.user!.uid)),
-    //       child: GenderScreen(),
-    //     ),
+    'gender': (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<MyUserBloc>(
+              create: (context) => MyUserBloc(
+                  myUserRepository:
+                      context.read<AuthenticationBloc>().userRepository)
+                ..add(GetMyUser(
+                    myUserId:
+                        context.read<AuthenticationBloc>().state.user!.uid)),
+            ),
+            ChangeNotifierProvider(create: (_) => TemporaryGenderProvider()),
+          ],
+          child: GenderScreen(),
+        ),
     // Home route
-    '/home': (context) => BlocProvider<PostBloc>(
+    'home': (context) => BlocProvider<PostBloc>(
           create: (context) =>
               PostBloc(postRepository: FirebasePostRepository())
                 ..add(FetchPosts()),
           child: const HomeScreen(),
         ),
     // Post route
-    '/post': (context) => BlocProvider<PostBloc>(
+    'post': (context) => BlocProvider<PostBloc>(
           create: (context) =>
               PostBloc(postRepository: FirebasePostRepository())
                 ..add(FetchPosts()),
@@ -55,7 +66,7 @@ class MyAppView extends StatelessWidget {
         ),
 
     // Sign in route
-    '/sign_in': (context) => BlocProvider<SignInBloc>(
+    'sign_in': (context) => BlocProvider<SignInBloc>(
           create: (context) => SignInBloc(
             userRepository: context.read<AuthenticationBloc>().userRepository,
           ),
@@ -63,7 +74,7 @@ class MyAppView extends StatelessWidget {
         ),
 
     // BirthDate route
-    '/birthday': (context) => BlocProvider<MyUserBloc>(
+    'birthday': (context) => BlocProvider<MyUserBloc>(
           create: (context) => MyUserBloc(
               myUserRepository:
                   context.read<AuthenticationBloc>().userRepository)
@@ -71,7 +82,7 @@ class MyAppView extends StatelessWidget {
                 myUserId: context.read<AuthenticationBloc>().state.user!.uid)),
           child: BirthDateScreen(),
         ),
-    '/name': (context) => BlocProvider<MyUserBloc>(
+    'name': (context) => BlocProvider<MyUserBloc>(
           create: (context) => MyUserBloc(
               myUserRepository:
                   context.read<AuthenticationBloc>().userRepository)
@@ -79,7 +90,7 @@ class MyAppView extends StatelessWidget {
                 myUserId: context.read<AuthenticationBloc>().state.user!.uid)),
           child: DisplayNameScreen(),
         ),
-    '/image': (context) => MultiBlocProvider(
+    'image': (context) => MultiBlocProvider(
           providers: [
             BlocProvider<MyUserBloc>(
               create: (context) => MyUserBloc(
@@ -92,7 +103,7 @@ class MyAppView extends StatelessWidget {
           ],
           child: ImageUploadScreen(),
         ),
-    '/workType': (context) => BlocProvider<JobBloc>(
+    'workType': (context) => BlocProvider<JobBloc>(
           create: (context) => JobBloc()..add(GetJob()),
           child: WorkTypeScreen(),
         ),
@@ -118,55 +129,66 @@ class MyAppView extends StatelessWidget {
           ],
           child: FavoriteJob(),
         ),
+    'otp_screen': (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<OTPBloc>(
+              create: (context) => OTPBloc(),
+            ),
+            ChangeNotifierProvider(create: (_) => TemporaryOTPProvider()),
+            ChangeNotifierProvider(create: (_) => TemporaryCounterProvider()),
+          ],
+          child: OTPScreen(),
+        ),
   };
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'InstaX',
-      theme: ThemeData(
-        fontFamily: "NotoSansThai",
-        colorScheme: const ColorScheme.light(
-            background: Colors.white,
-            onBackground: Colors.black,
-            primary: Color.fromRGBO(206, 147, 216, 1),
-            onPrimary: Colors.black,
-            secondary: Color.fromRGBO(244, 143, 177, 1),
-            onSecondary: Colors.white,
-            tertiary: Color.fromRGBO(255, 204, 128, 1),
-            error: Colors.red,
-            outline: Color(0xFF424242)),
-      ),
-      routes: routes,
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, state) {
-        if (state.status == AuthenticationStatus.authenticated) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => SignInBloc(
-                    userRepository:
-                        context.read<AuthenticationBloc>().userRepository),
-              ),
-              BlocProvider(
-                create: (context) => MyUserBloc(
-                    myUserRepository:
-                        context.read<AuthenticationBloc>().userRepository)
-                  ..add(GetMyUser(
-                      myUserId:
-                          context.read<AuthenticationBloc>().state.user!.uid)),
-              ),
-              ChangeNotifierProvider(create: (_) => TemporaryGenderProvider()),
-              ChangeNotifierProvider(
-                  create: (_) => TemporarySelectedJobsProvider()),
-            ],
-            child: WorkTypeScreen(),
-          );
-        } else {
-          return const SignInScreen();
-        }
-      }),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'InstaX',
+          routes: routes,
+          theme: ThemeData(
+            fontFamily: 'NotoSansThai',
+            useMaterial3: true,
+            colorSchemeSeed: state.primaryColor,
+          ),
+          home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+            if (state.status == AuthenticationStatus.authenticated) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => SignInBloc(
+                        userRepository:
+                            context.read<AuthenticationBloc>().userRepository),
+                  ),
+                  BlocProvider(
+                    create: (context) => MyUserBloc(
+                        myUserRepository:
+                            context.read<AuthenticationBloc>().userRepository)
+                      ..add(GetMyUser(
+                          myUserId: context
+                              .read<AuthenticationBloc>()
+                              .state
+                              .user!
+                              .uid)),
+                  ),
+                  ChangeNotifierProvider(
+                      create: (_) => TemporaryGenderProvider()),
+                  ChangeNotifierProvider(
+                      create: (_) => TemporarySelectedJobsProvider()),
+                  ChangeNotifierProvider(create: (_) => TemporaryOTPProvider()),
+                ],
+                child: GenderScreen(),
+              );
+            } else {
+              return const SignInScreen();
+            }
+          }),
+        );
+      },
     );
   }
 }

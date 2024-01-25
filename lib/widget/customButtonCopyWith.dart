@@ -18,7 +18,6 @@ class CustomButtonWrapper extends StatelessWidget {
     return CustomButton(
       onPressed: onPressed,
       text: text,
-      color: color,
     );
   }
 }
@@ -26,13 +25,11 @@ class CustomButtonWrapper extends StatelessWidget {
 class CustomButton extends StatefulWidget {
   final VoidCallback onPressed;
   final String text;
-  final Color color;
 
   CustomButton({
     Key? key,
     required this.onPressed,
     required this.text,
-    required this.color,
   }) : super(key: key);
 
   @override
@@ -42,12 +39,10 @@ class CustomButton extends StatefulWidget {
   CustomButton update({
     VoidCallback? onPressed,
     String? text,
-    Color? color,
   }) {
     return CustomButton(
       onPressed: onPressed ?? this.onPressed,
       text: text ?? this.text,
-      color: color ?? this.color,
     );
   }
 }
@@ -56,7 +51,7 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   void didUpdateWidget(covariant CustomButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print('CustomButton State changed: ${widget.text}, ${widget.color}');
+    print('CustomButton State changed: ${widget.text}');
   }
 
   // CopyWith method to create a new instance with updated properties
@@ -68,7 +63,6 @@ class _CustomButtonState extends State<CustomButton> {
     return CustomButton(
       onPressed: onPressed ?? widget.onPressed,
       text: text ?? widget.text,
-      color: color ?? widget.color,
     );
   }
 
@@ -77,7 +71,6 @@ class _CustomButtonState extends State<CustomButton> {
     return ElevatedButton(
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: widget.color,
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -86,7 +79,7 @@ class _CustomButtonState extends State<CustomButton> {
       ),
       child: Text(
         widget.text,
-        style: TextStyle(fontSize: 17, color: Colors.white),
+        style: TextStyle(fontSize: 17),
       ),
     );
   }

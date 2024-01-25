@@ -27,7 +27,6 @@ class _MyFormScreenState extends State<MyFormScreen> {
                 print('Form submitted');
               },
               text: _buttonText,
-              color: _buttonColor,
             ),
             const SizedBox(height: 20),
             ElevatedButton(

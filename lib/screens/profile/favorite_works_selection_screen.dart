@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instax/blocs/Job_post_bloc/job_post_bloc.dart';
-import 'package:instax/blocs/Job_post_bloc/job_post_event.dart';
-import 'package:instax/blocs/Job_post_bloc/job_post_state.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_bloc.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_state.dart';
+import 'package:instax/widget/switchThemeColor.dart';
 
 class FavoriteWorksSelectionScreen extends StatelessWidget {
   const FavoriteWorksSelectionScreen({super.key});
@@ -20,6 +18,9 @@ class FavoriteWorksSelectionScreen extends StatelessWidget {
                   color: Colors.black, size: 30, semanticLabel: 'More'),
             ],
           ),
+          actions: const [
+            SwitchThemeColor(),
+          ],
         ),
         body: BlocBuilder<JobBloc, JobState>(builder: (context, jobState) {
           print(jobState.selectedJobs);

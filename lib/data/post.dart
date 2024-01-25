@@ -103,7 +103,7 @@ class JobDataService {
     return jobPosts;
   }
 
-  static List<JobPost> getJobPosts() {
+  static List<JobPost> JobPostsGetRequested() {
     return jobPosts;
   }
 

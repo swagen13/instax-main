@@ -4,6 +4,7 @@ import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
 import 'package:instax/widget/customButton.dart';
 import 'package:instax/widget/customTextField.dart';
+import 'package:instax/widget/switchThemeColor.dart';
 
 class DisplayNameScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -13,6 +14,12 @@ class DisplayNameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        actions: const [
+          SwitchThemeColor(),
+        ],
+      ),
       body: BlocBuilder<MyUserBloc, MyUserState>(
         builder: (context, state) {
           // Initialize the _nameController text with the value from state.myUser.name
@@ -26,11 +33,10 @@ class DisplayNameScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 50),
                 const Text(
                   'ชื่อเล่น',
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
                   ),
@@ -63,11 +69,11 @@ class DisplayNameScreen extends StatelessWidget {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/image');
+                      Navigator.pushNamed(context, 'image');
                     },
                     child: const Text(
                       "ข้ามไปก่อน",
-                      style: TextStyle(color: Colors.black, fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 )

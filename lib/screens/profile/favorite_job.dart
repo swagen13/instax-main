@@ -6,6 +6,7 @@ import 'package:instax/blocs/jobs_bloc/jobs_state.dart';
 import 'package:instax/blocs/subjob_bloc/subjob_bloc.dart';
 import 'package:instax/blocs/subjob_bloc/subjob_state.dart';
 import 'package:instax/widget/FavoriteJobBottomSheet.dart';
+import 'package:instax/widget/switchThemeColor.dart';
 import 'package:job_repository/job_repository.dart';
 
 // ignore: must_be_immutable
@@ -17,6 +18,12 @@ class FavoriteJob extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        actions: const [
+          SwitchThemeColor(),
+        ],
+      ),
       body: BlocConsumer<JobBloc, JobState>(
         listener: (context, state) {
           if (state.selectedSubJobs.isNotEmpty) {
@@ -32,9 +39,7 @@ class FavoriteJob extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 100,
-                    ),
+                    const SizedBox(height: 50),
                     const Text(
                       "ประเภทงานที่สนใจ",
                       style: TextStyle(
@@ -90,7 +95,6 @@ class FavoriteJob extends StatelessWidget {
                                         Text(
                                           job.jobName,
                                           style: const TextStyle(
-                                            color: Colors.white,
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -127,8 +131,6 @@ class FavoriteJob extends StatelessWidget {
                                                               '${subJob.subJobName}${isLastItem ? '' : ','}',
                                                               style:
                                                                   const TextStyle(
-                                                                color: Colors
-                                                                    .white,
                                                                 fontSize: 16,
                                                               ),
                                                             )

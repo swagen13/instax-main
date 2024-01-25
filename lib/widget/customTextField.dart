@@ -5,7 +5,6 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final String prefixText;
   final bool isDisabled;
-  final Color bgColor; // Add this property for customizable text color
 
   const CustomTextField({
     Key? key,
@@ -13,7 +12,6 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.prefixText,
     this.isDisabled = false,
-    this.bgColor = Colors.white, // Default text color is black
   }) : super(key: key);
 
   @override
@@ -22,13 +20,11 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(prefixText,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 15)), // Apply text color here
+            style: const TextStyle(fontSize: 15)), // Apply text color here
         const SizedBox(height: 5),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: bgColor,
           ),
           child: TextField(
             controller: controller,

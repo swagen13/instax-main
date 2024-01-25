@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instax/screens/authentication/login_screen.dart';
 
-class OnBoard extends StatefulWidget {
-  const OnBoard({super.key});
-
-  @override
-  State<OnBoard> createState() => _OnBoardState();
-}
-
-class _OnBoardState extends State<OnBoard> {
+class OnBoard extends StatelessWidget {
   static const Color backgroundColor = Color(0xFF0056D2);
 
   @override

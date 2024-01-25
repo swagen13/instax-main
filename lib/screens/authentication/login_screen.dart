@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:instax/screens/authentication/phone_verify.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,16 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // navigation to login screen
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhoneVerify()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PhoneVerify(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 66, 103, 178),
                     minimumSize: const Size(350, 50),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Adjust the radius as needed
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     alignment: Alignment.centerLeft,
                   ),
@@ -82,9 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // navigation to login screen
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhoneVerify()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PhoneVerify(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 66, 133, 244),
@@ -121,9 +119,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // navigation to login screen
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhoneVerify()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PhoneVerify(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 0, 184, 0),
@@ -154,19 +154,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // navigation to login screen
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhoneVerify()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PhoneVerify(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white
-                        .withOpacity(0.0), // Set background color with opacity
+                    backgroundColor: Colors.white.withOpacity(0.0),
                     minimumSize: const Size(350, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: const BorderSide(
-                          color: Colors.white,
-                          width: 2.0), // Set border color and width
+                        color: Colors.white,
+                        width: 2.0,
+                      ),
                     ),
                   ),
                   child: const Text(

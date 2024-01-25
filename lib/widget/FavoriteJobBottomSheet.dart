@@ -235,13 +235,11 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(255, 34, 82, 255)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      )),
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  )),
                   onPressed: () {
                     print(temporaryGenderProvider.selectedSubJobs);
 
@@ -253,7 +251,6 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                   },
                   child: const Text('เข้าร่วมประเภทงานนี้',
                       style: TextStyle(
-                        color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       )),

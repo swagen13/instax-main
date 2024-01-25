@@ -7,10 +7,10 @@ sealed class JobPostEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetJobPosts extends JobPostEvent {
+class JobPostsGetRequested extends JobPostEvent {
   final String subJobIds;
 
-  const GetJobPosts(this.subJobIds);
+  const JobPostsGetRequested(this.subJobIds);
 
   @override
   List<Object> get props => [subJobIds];
