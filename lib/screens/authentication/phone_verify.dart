@@ -9,6 +9,7 @@ import 'package:instax/blocs/theme_bloc/theme_bloc.dart';
 import 'package:instax/blocs/theme_bloc/theme_event.dart';
 import 'package:instax/blocs/theme_bloc/theme_state.dart';
 import 'package:instax/widget/customButton.dart';
+import 'package:instax/widget/switchThemeColor.dart';
 
 class PhoneVerify extends StatelessWidget {
   const PhoneVerify({super.key});
@@ -19,38 +20,7 @@ class PhoneVerify extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ยืนยันเบอร์โทร'),
         centerTitle: true,
-        actions: [
-          BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, state) {
-              return Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      context.read<ThemeBloc>().add(UpdateThemeDataEvent(
-                            ThemeData(
-                              primaryColor: Colors.blue,
-                            ),
-                          ));
-                    },
-                    child: Text('blue'),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        context.read<ThemeBloc>().add(UpdateThemeDataEvent(
-                              ThemeData(
-                                primaryColor: Colors.yellow,
-                              ),
-                            ));
-                      },
-                      child: Text(
-                        'yellow',
-                      )),
-                  const SizedBox(width: 10),
-                ],
-              );
-            },
-          ),
-        ],
+        actions: [SwitchThemeColor()],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

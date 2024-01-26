@@ -29,7 +29,7 @@ class FavoriteWorksSelectionScreen extends StatelessWidget {
           // get the selected jobs from the jobState
           final selectedJobs = jobState.selectedSubJobs
               .map((e) => jobState.jobs
-                  .where((element) => element.jobId == e.jobParentId))
+                  .where((element) => element.parentId == e.parentId))
               .toList()
               .first;
 

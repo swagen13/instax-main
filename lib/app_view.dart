@@ -6,7 +6,6 @@ import 'package:instax/blocs/jobs_bloc/jobs_bloc.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_event.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/otp_bloc/otp_bloc.dart';
-import 'package:instax/blocs/phone_number_bloc/phone_number_bloc.dart';
 import 'package:instax/blocs/post_bloc/post_bloc.dart';
 import 'package:instax/blocs/post_bloc/post_event.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
@@ -15,8 +14,8 @@ import 'package:instax/blocs/theme_bloc/theme_state.dart';
 import 'package:instax/providers/temporary_gender_provider.dart';
 import 'package:instax/providers/temporary_job_selected_provider.dart';
 import 'package:instax/providers/temporary_otp_provider.dart';
+import 'package:instax/screens/authentication/login_screen.dart';
 import 'package:instax/screens/authentication/otp_screen.dart';
-import 'package:instax/screens/authentication/phone_verify.dart';
 import 'package:instax/screens/authentication/sign_in_screen.dart';
 import 'package:instax/screens/home/home_screen.dart';
 import 'package:instax/screens/home/post_screen.dart';
@@ -105,7 +104,7 @@ class MyAppView extends StatelessWidget {
         ),
     'workType': (context) => BlocProvider<JobBloc>(
           create: (context) => JobBloc()..add(GetJob()),
-          child: WorkTypeScreen(),
+          child: const WorkTypeScreen(),
         ),
     'workType/favorite': (context) => MultiBlocProvider(
           providers: [
@@ -181,10 +180,10 @@ class MyAppView extends StatelessWidget {
                       create: (_) => TemporarySelectedJobsProvider()),
                   ChangeNotifierProvider(create: (_) => TemporaryOTPProvider()),
                 ],
-                child: GenderScreen(),
+                child: WorkTypeScreen(),
               );
             } else {
-              return const SignInScreen();
+              return const LoginScreen();
             }
           }),
         );

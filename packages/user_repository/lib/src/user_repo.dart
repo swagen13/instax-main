@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import '../user_repository.dart';
 
@@ -5,6 +7,8 @@ abstract class UserRepository {
   Stream<User?> get user;
 
   Future<void> signIn(String email, String password);
+
+  Future<void> signInWithFacebook();
 
   Future<void> logOut();
 
@@ -18,5 +22,5 @@ abstract class UserRepository {
 
   Future<MyUser> getMyUser(String myUserId);
 
-  Future<String> uploadPicture(String file, String userId);
+  Future<void> uploadPicture(File imageFile, String userId);
 }

@@ -18,6 +18,6 @@ class SignOutRequired extends SignInEvent {
   const SignOutRequired();
 }
 
-class SignInWithGoogleRequired extends SignInEvent {
-  const SignInWithGoogleRequired();
+class SignInWithFacebookRequired extends SignInEvent {
+  const SignInWithFacebookRequired();
 }

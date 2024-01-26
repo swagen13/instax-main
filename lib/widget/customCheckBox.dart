@@ -20,13 +20,12 @@ class CustomCheckbox extends StatelessWidget {
           onTap(value);
         },
         title: Card(
-            color: Colors.white,
+            elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(
-                color: Color.fromARGB(255, 207, 207, 207),
-                width: 1,
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
               ),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -49,8 +48,8 @@ class CustomCheckbox extends StatelessWidget {
                       border: Border.all(
                         color: selectedValue == value
                             ? Theme.of(context).colorScheme.primary
-                            : const Color.fromARGB(255, 207, 207, 207),
-                        width: 2,
+                            : Theme.of(context).colorScheme.outline,
+                        width: 1,
                       ),
                     ),
                     child: selectedValue == value

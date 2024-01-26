@@ -24,7 +24,7 @@ class DisplayNameScreen extends StatelessWidget {
         builder: (context, state) {
           // Initialize the _nameController text with the value from state.myUser.name
           if (_nameController.text.isEmpty) {
-            _nameController.text = state.myUser.name;
+            _nameController.text = state.myUser.displayName;
           }
 
           return Padding(
@@ -58,7 +58,7 @@ class DisplayNameScreen extends StatelessWidget {
                     context.read<MyUserBloc>().add(
                           UpdateMyUser(
                             myUser: state.myUser.copyWith(
-                              name: _nameController.text,
+                              displayName: _nameController.text,
                             ),
                           ),
                         );
@@ -73,7 +73,7 @@ class DisplayNameScreen extends StatelessWidget {
                     },
                     child: const Text(
                       "ข้ามไปก่อน",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ),
                 )

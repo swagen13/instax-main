@@ -4,47 +4,78 @@ import '../entities/entities.dart';
 
 // ignore: must_be_immutable
 class MyUser extends Equatable {
-  final String id;
+  final String createdAt;
+  final bool disabled;
+  final String displayName;
   final String email;
-  final String name;
-  String? gender;
-  String? picture;
-  String? birthDate;
+  final bool emailVerified;
+  final String lastLoginAt;
+  final String phoneNumber;
+  final String photoURL;
+  final String providerDisplayName;
+  final String providerEmail;
+  final String providerId;
+  final String providerPhotoURL;
+  final String providerUid;
+  final String uid;
+  late final String birthDate;
 
   MyUser({
-    required this.id,
+    required this.createdAt,
+    required this.disabled,
+    required this.displayName,
     required this.email,
-    required this.name,
-    required this.gender,
-    this.picture,
-    this.birthDate,
+    required this.emailVerified,
+    required this.lastLoginAt,
+    required this.phoneNumber,
+    required this.photoURL,
+    required this.providerDisplayName,
+    required this.providerEmail,
+    required this.providerId,
+    required this.providerPhotoURL,
+    required this.providerUid,
+    required this.uid,
+    required this.birthDate,
   });
 
   /// Empty user which represents an unauthenticated user.
   static final empty = MyUser(
-    id: '',
+    createdAt: '',
+    disabled: false,
+    displayName: '',
     email: '',
-    name: '',
-    picture: '',
-    gender: '',
+    emailVerified: false,
+    lastLoginAt: '',
+    phoneNumber: '',
+    photoURL: '',
+    providerDisplayName: '',
+    providerEmail: '',
+    providerId: '',
+    providerPhotoURL: '',
+    providerUid: '',
+    uid: '',
     birthDate: '',
   );
 
   /// Modify MyUser parameters
-  MyUser copyWith(
-      {String? id,
-      String? email,
-      String? name,
-      String? picture,
-      String? gender,
-      String? birthDate}) {
+  MyUser copyWith({String? uid, String? email, String? displayName}) {
     return MyUser(
-        id: id ?? this.id,
-        email: email ?? this.email,
-        name: name ?? this.name,
-        picture: picture ?? this.picture,
-        gender: gender ?? this.gender,
-        birthDate: birthDate ?? this.birthDate);
+      createdAt: createdAt,
+      disabled: disabled,
+      displayName: displayName ?? "",
+      email: email ?? "",
+      emailVerified: emailVerified,
+      lastLoginAt: lastLoginAt,
+      phoneNumber: phoneNumber,
+      photoURL: photoURL,
+      providerDisplayName: providerDisplayName,
+      providerEmail: providerEmail,
+      providerId: providerId,
+      providerPhotoURL: providerPhotoURL,
+      providerUid: providerUid,
+      uid: uid ?? this.uid,
+      birthDate: birthDate,
+    );
   }
 
   /// Convenience getter to determine whether the current user is empty.
@@ -55,32 +86,60 @@ class MyUser extends Equatable {
 
   MyUserEntity toEntity() {
     return MyUserEntity(
-        id: id,
-        email: email,
-        name: name,
-        picture: picture,
-        gender: gender,
-        birthDate: birthDate);
+      createdAt: createdAt,
+      disabled: disabled,
+      displayName: displayName,
+      email: email,
+      emailVerified: emailVerified,
+      lastLoginAt: lastLoginAt,
+      phoneNumber: phoneNumber,
+      photoURL: photoURL,
+      providerDisplayName: providerDisplayName,
+      providerEmail: providerEmail,
+      providerId: providerId,
+      providerPhotoURL: providerPhotoURL,
+      providerUid: providerUid,
+      uid: uid,
+      birthDate: birthDate,
+    );
   }
 
   static MyUser fromEntity(MyUserEntity entity) {
     return MyUser(
-      id: entity.id,
+      createdAt: entity.createdAt,
+      disabled: entity.disabled,
+      displayName: entity.displayName,
       email: entity.email,
-      name: entity.name,
-      picture: entity.picture,
-      gender: entity.gender,
+      emailVerified: entity.emailVerified,
+      lastLoginAt: entity.lastLoginAt,
+      phoneNumber: entity.phoneNumber,
+      photoURL: entity.photoURL,
+      providerDisplayName: entity.providerDisplayName,
+      providerEmail: entity.providerEmail,
+      providerId: entity.providerId,
+      providerPhotoURL: entity.providerPhotoURL,
+      providerUid: entity.providerUid,
+      uid: entity.uid,
       birthDate: entity.birthDate,
     );
   }
 
   @override
   List<Object?> get props => [
-        id,
+        createdAt,
+        disabled,
+        displayName,
         email,
-        name,
-        picture,
-        gender,
+        emailVerified,
+        lastLoginAt,
+        phoneNumber,
+        photoURL,
+        providerDisplayName,
+        providerEmail,
+        providerId,
+        providerPhotoURL,
+        providerUid,
+        uid,
         birthDate,
       ];
 }

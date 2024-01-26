@@ -117,7 +117,7 @@ class BirthDateScreen extends StatelessWidget {
                       },
                       child: const Text(
                         "ข้ามไปก่อน",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       )),
                 )
               ],

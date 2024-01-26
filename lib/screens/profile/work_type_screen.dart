@@ -22,7 +22,8 @@ class WorkTypeScreen extends StatelessWidget {
               state.selectedJobs.isNotEmpty) {
             context.read<SubJobBloc>().add(
                   GetSubjobByJobIds(
-                      jobIds: state.selectedJobs.map((e) => e.jobId).toList()),
+                      jobIds:
+                          state.selectedJobs.map((e) => e.parentId).toList()),
                 );
 
             // navigation to next screen
@@ -38,7 +39,7 @@ class WorkTypeScreen extends StatelessWidget {
                 Provider.of<TemporarySelectedJobsProvider>(context,
                     listen: false);
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -51,73 +52,72 @@ class WorkTypeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Wrap(
                       children: state.jobs.map((job) {
-                        return Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              if (selectedJobsProvider.selectedJobs
-                                  .contains(job)) {
-                                selectedJobsProvider.removeSelectedJob(job);
-                              } else {
-                                selectedJobsProvider.addSelectedJob(job);
-                              }
-                            },
-                            child: Card(
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image(
-                                      image: NetworkImage(job.imageUrl),
-                                      fit: BoxFit.cover,
-                                      height: 130,
-                                    ),
+                        return GestureDetector(
+                          onTap: () {
+                            if (selectedJobsProvider.selectedJobs
+                                .contains(job)) {
+                              selectedJobsProvider.removeSelectedJob(job);
+                            } else {
+                              selectedJobsProvider.addSelectedJob(job);
+                            }
+                          },
+                          child: Card(
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image(
+                                    image: AssetImage(job.icon ??
+                                        'assets/images/construction_image.jpg'),
+                                    fit: BoxFit.cover,
+                                    height: 95,
                                   ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                            Colors.black.withOpacity(0.8),
-                                            Colors.transparent,
-                                          ],
-                                        ),
-                                      ),
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            job.jobName,
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          if (Provider.of<
-                                                      TemporarySelectedJobsProvider>(
-                                                  context)
-                                              .selectedJobs
-                                              .contains(job))
-                                            const Icon(
-                                              Icons.check_circle,
-                                              color: Colors.white,
-                                            ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                          Colors.black.withOpacity(0.8),
+                                          Colors.transparent,
                                         ],
                                       ),
                                     ),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          job.name,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        if (Provider.of<
+                                                    TemporarySelectedJobsProvider>(
+                                                context)
+                                            .selectedJobs
+                                            .contains(job))
+                                          const Icon(
+                                            Icons.check_circle,
+                                            color: Colors.white,
+                                          ),
+                                      ],
+                                    ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -144,6 +144,7 @@ class WorkTypeScreen extends StatelessWidget {
                             ],
                           )
                         : Container(),
+                    SizedBox(height: 50)
                   ],
                 ),
               ),

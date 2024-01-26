@@ -4,16 +4,14 @@ import 'package:job_repository/src/models/job.dart';
 import 'job_repo.dart';
 
 class FirebaseJobRepository implements JobRepository {
-  final jobCollection = FirebaseFirestore.instance.collection('jobs');
-  final subJobCollection = FirebaseFirestore.instance.collection('subJobs');
+  final skillsCollection = FirebaseFirestore.instance.collection('skills');
+  final subskillsCollection =
+      FirebaseFirestore.instance.collection('skillChildrens');
 
   @override
   Future<List<Job>> getJob() {
     try {
-      jobCollection.get().then((value) => value.docs
-          .map((e) => Job.fromEntity(JobEntity.fromDocument(e.data())))
-          .toList());
-      return jobCollection.get().then((value) => value.docs
+      return skillsCollection.get().then((value) => value.docs
           .map((e) => Job.fromEntity(JobEntity.fromDocument(e.data())))
           .toList());
     } catch (e) {
@@ -25,7 +23,16 @@ class FirebaseJobRepository implements JobRepository {
   @override
   Future<List<SubJob>> getSubjobByJobIds(List<String> jobIds) {
     try {
-      return subJobCollection.where('jobParentId', whereIn: jobIds).get().then(
+      // loop for each jobIds
+      subskillsCollection
+          .where('parentId', whereIn: jobIds)
+          .get()
+          .then((value) {
+        value.docs.forEach((element) {
+          print('element.data() : ${element.data()}');
+        });
+      });
+      return subskillsCollection.where('parentId', whereIn: jobIds).get().then(
           (value) => value.docs
               .map(
                   (e) => SubJob.fromEntity(SubJobEntity.fromDocument(e.data())))

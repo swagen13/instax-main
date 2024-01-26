@@ -18,11 +18,12 @@ class SwitchThemeColor extends StatelessWidget {
               onPressed: () {
                 // set the color to share preference
                 SharedPreferences.getInstance().then((prefs) {
-                  prefs.setInt('ThemeColor', Colors.blue.value);
+                  prefs.setInt(
+                      'ThemeColor', Color.fromRGBO(0, 86, 210, 1).value);
                 });
                 context.read<ThemeBloc>().add(UpdateThemeDataEvent(
                       ThemeData(
-                        primaryColor: Colors.blue,
+                        primaryColor: Color.fromRGBO(0, 86, 210, 1),
                       ),
                     ));
               },

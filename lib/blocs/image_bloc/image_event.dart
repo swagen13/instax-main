@@ -11,3 +11,13 @@ class ImageSelectedEvent extends ImageSelectionEvent {
   @override
   List<Object> get props => [selectedImage];
 }
+
+class UploadImageEvent extends ImageSelectionEvent {
+  final File selectedImage;
+  final String uid;
+
+  UploadImageEvent({required this.selectedImage, required this.uid});
+
+  @override
+  List<Object> get props => [selectedImage];
+}

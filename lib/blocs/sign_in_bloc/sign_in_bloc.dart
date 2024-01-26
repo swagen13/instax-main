@@ -24,6 +24,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         // emit(const SignInFailure());
       }
     });
+    on<SignInWithFacebookRequired>((event, emit) async {
+      emit(SignInProcess());
+      try {
+        await _userRepository.signInWithFacebook();
+        emit(SignInSuccess());
+      } catch (e) {
+        print('error is ${e.toString()}');
+        emit(const SignInFailure());
+      }
+    });
     on<SignOutRequired>((event, emit) async {
       await _userRepository.logOut();
     });

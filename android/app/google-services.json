@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "483434719398",
+    "firebase_url": "https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "plawarn-6704c",
+    "storage_bucket": "plawarn-6704c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483434719398:android:2f0c677e97158268d6ac67",
+        "android_client_info": {
+          "package_name": "com.example.instax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdP8Hb1rkl575xF3hmJhP96h4MvlNPJ34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "483434719398-0ao7s0bb55aolab8lm8p8np0l6598esj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.com.plawarn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483434719398:android:2ec9a77ec4f3a263d6ac67",
+        "android_client_info": {
+          "package_name": "com.example.test_login_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdP8Hb1rkl575xF3hmJhP96h4MvlNPJ34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "483434719398-0ao7s0bb55aolab8lm8p8np0l6598esj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.com.plawarn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483434719398:android:1128268e339a4c44d6ac67",
+        "android_client_info": {
+          "package_name": "com.plawarn.devinnoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483434719398-oegvkrou7ppejvcn2vru2tbqoftvgfme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plawarn.devinnoapp",
+            "certificate_hash": "c8c1f8892befd2fae59f34809b6d694d8082fcc7"
+          }
+        },
+        {
+          "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdP8Hb1rkl575xF3hmJhP96h4MvlNPJ34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483434719398-9seefo99mq5enpemppbs2bnpe34iu5is.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "483434719398-0ao7s0bb55aolab8lm8p8np0l6598esj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.com.plawarn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

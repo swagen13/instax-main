@@ -24,10 +24,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -52,13 +49,24 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCdP8Hb1rkl575xF3hmJhP96h4MvlNPJ34',
+    appId: '1:483434719398:android:2f0c677e97158268d6ac67',
+    messagingSenderId: '483434719398',
+    projectId: 'plawarn-6704c',
+    databaseURL: 'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'plawarn-6704c.appspot.com',
+  );
+
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC1pcOSBSpmYw12o9RHchPoWwKyZ7_n31s',
-    appId: '1:73152389863:ios:515051b512dfa23babf842',
-    messagingSenderId: '73152389863',
-    projectId: 'flutter-bloc-app-d351b',
-    storageBucket: 'flutter-bloc-app-d351b.appspot.com',
-    iosClientId: '73152389863-221gl3dro923ov2sdli9spa5g97srdpm.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAMi0eaWPFbw71Exy5Ju41QVpzlkZlS7Tg',
+    appId: '1:483434719398:ios:df2c12e86f007628d6ac67',
+    messagingSenderId: '483434719398',
+    projectId: 'plawarn-6704c',
+    databaseURL: 'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'plawarn-6704c.appspot.com',
+    androidClientId: '483434719398-06hl0h7o7188kh8uupe6b61lb51k1c25.apps.googleusercontent.com',
+    iosClientId: '483434719398-pad1b4ipc2i64ke21s9sb4i1ur1ck03r.apps.googleusercontent.com',
     iosBundleId: 'com.example.instax',
   );
 }

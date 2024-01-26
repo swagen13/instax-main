@@ -1,77 +1,155 @@
 import '../entities/entities.dart';
 
 class SubJob {
-  final String subJobId;
-  final String subJobName;
-  final String jobParentId;
+  String? color;
+  String createdAt;
+  String updatedAt;
+  String? description;
+  String? icon;
+  String id;
+  String name;
+  String parentId;
+  int sequence;
+  String slug;
+  List<Map<String, String>> translations; // List to hold translation maps
 
   SubJob({
-    required this.subJobId,
-    required this.subJobName,
-    required this.jobParentId,
+    this.color,
+    required this.createdAt,
+    required this.updatedAt,
+    this.description,
+    this.icon,
+    required this.id,
+    required this.name,
+    required this.parentId,
+    required this.sequence,
+    required this.slug,
+    required this.translations,
   });
 
   SubJobEntity toEntity() {
     return SubJobEntity(
-      subJobId: subJobId,
-      subJobName: subJobName,
-      jobParentId: jobParentId,
+      color: color,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      description: description,
+      icon: icon,
+      id: id,
+      name: name,
+      parentId: parentId,
+      sequence: sequence,
+      slug: slug,
+      translations: translations,
     );
   }
 
   static SubJob fromEntity(SubJobEntity entity) {
     return SubJob(
-      subJobId: entity.subJobId,
-      subJobName: entity.subJobName,
-      jobParentId: entity.jobParentId,
+      color: entity.color,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      description: entity.description,
+      icon: entity.icon,
+      id: entity.id,
+      name: entity.name,
+      parentId: entity.parentId,
+      sequence: entity.sequence,
+      slug: entity.slug,
+      translations: entity.translations,
     );
   }
 
   @override
   String toString() {
     return '''SubJob: {
-      subJobId: $subJobId,
-      subJobName: $subJobName,
-      jobParentId: $jobParentId
+      color: $color
+      createdAt: $createdAt
+      updatedAt: $updatedAt
+      description: $description
+      icon: $icon
+      id: $id
+      name: $name
+      parentId: $parentId
+      sequence: $sequence
+      slug: $slug
+      translations: $translations
     }''';
   }
 }
 
 class Job {
-  final String jobId;
-  final String jobName;
-  final String imageUrl;
-  final List<Job> selectedJobs;
+  String? color;
+  String createdAt;
+  String updatedAt;
+  String? description;
+  String? icon;
+  String id;
+  String name;
+  String parentId;
+  int sequence;
+  String slug;
+  List<Map<String, String>> translations; // List to hold translation maps
 
   Job({
-    required this.jobId,
-    required this.jobName,
-    required this.imageUrl,
-    this.selectedJobs = const [],
+    this.color,
+    required this.createdAt,
+    required this.updatedAt,
+    this.description,
+    this.icon,
+    required this.id,
+    required this.name,
+    required this.parentId,
+    required this.sequence,
+    required this.slug,
+    required this.translations,
   });
 
   JobEntity toEntity() {
     return JobEntity(
-      jobId: jobId,
-      jobName: jobName,
-      imageUrl: imageUrl,
+      color: color,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      description: description,
+      icon: icon,
+      id: id,
+      name: name,
+      parentId: parentId,
+      sequence: sequence,
+      slug: slug,
+      translations: translations,
     );
   }
 
   static Job fromEntity(JobEntity entity) {
     return Job(
-      jobId: entity.jobId,
-      jobName: entity.jobName,
-      imageUrl: entity.imageUrl,
+      color: entity.color,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      description: entity.description,
+      icon: entity.icon,
+      id: entity.id,
+      name: entity.name,
+      parentId: entity.parentId,
+      sequence: entity.sequence,
+      slug: entity.slug,
+      translations: entity.translations,
     );
   }
 
   @override
   String toString() {
     return '''Job: {
-      jobId: $jobId,
-      jobName: $jobName,
-      imageUrl: $imageUrl
+      color: $color
+      createdAt: $createdAt
+      updatedAt: $updatedAt
+      description: $description
+      icon: $icon
+      id: $id
+      name: $name
+      parentId: $parentId
+      sequence: $sequence
+      slug: $slug
+      translations: $translations
     }''';
   }
 }

@@ -39,7 +39,6 @@ class FavoriteJob extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 50),
                     const Text(
                       "ประเภทงานที่สนใจ",
                       style: TextStyle(
@@ -52,6 +51,13 @@ class FavoriteJob extends StatelessWidget {
                         return GestureDetector(
                           onTap: () async {
                             await showModalBottomSheet(
+                              scrollControlDisabledMaxHeightRatio: 0.8,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
                               context: context,
                               builder: (context) {
                                 return FavoriteJobBottomSheet(
@@ -66,7 +72,8 @@ class FavoriteJob extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image(
-                                    image: NetworkImage(job.imageUrl),
+                                    image: AssetImage(job.icon ??
+                                        'assets/images/construction_image.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -89,12 +96,14 @@ class FavoriteJob extends StatelessWidget {
                                     ),
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          job.jobName,
+                                          job.name,
                                           style: const TextStyle(
+                                            color: Colors.white,
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -111,7 +120,7 @@ class FavoriteJob extends StatelessWidget {
                                                       .map((subJob) {
                                                     // add uniquely the subjob to the list
                                                     if (!subjobs.contains(
-                                                        subJob.subJobId)) {
+                                                        subJob.parentId)) {
                                                       subjobs.add(subJob);
                                                     }
                                                     final isLastItem = subJob ==
@@ -119,18 +128,14 @@ class FavoriteJob extends StatelessWidget {
                                                             .subJobs.last;
 
                                                     return Container(
-                                                      margin:
-                                                          const EdgeInsets.only(
-                                                        right: 5,
-                                                        top: 5,
-                                                      ),
-                                                      child: subJob
-                                                                  .jobParentId ==
-                                                              job.jobId
+                                                      child: subJob.parentId ==
+                                                              job.parentId
                                                           ? Text(
-                                                              '${subJob.subJobName}${isLastItem ? '' : ','}',
+                                                              '${subJob.name}${isLastItem ? '' : ','}',
                                                               style:
                                                                   const TextStyle(
+                                                                color: Colors
+                                                                    .white,
                                                                 fontSize: 16,
                                                               ),
                                                             )

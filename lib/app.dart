@@ -50,7 +50,9 @@ class MainApp extends StatelessWidget {
         BlocProvider(
             create: (context) => MyUserBloc(myUserRepository: userRepository)),
         BlocProvider(
-          create: (context) => ImageSelectionBloc(),
+          create: (context) => ImageSelectionBloc(
+            userRepository,
+          ),
         ),
         BlocProvider(
           create: (context) => ThemeBloc(),

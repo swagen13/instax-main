@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:instax/screens/authentication/phone_verify.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -40,13 +42,9 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 150),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // navigation to login screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PhoneVerify(),
-                      ),
-                    );
+                    context
+                        .read<SignInBloc>()
+                        .add(const SignInWithFacebookRequired());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 66, 103, 178),
@@ -75,15 +73,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
-                  onPressed: () {
-                    // navigation to login screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PhoneVerify(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 66, 133, 244),
                     minimumSize: const Size(350, 50),

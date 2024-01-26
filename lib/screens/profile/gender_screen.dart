@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
-import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:instax/blocs/theme_bloc/theme_bloc.dart';
-import 'package:instax/blocs/theme_bloc/theme_event.dart';
-import 'package:instax/blocs/theme_bloc/theme_state.dart';
 import 'package:instax/providers/temporary_gender_provider.dart';
+import 'package:instax/widget/customButton.dart';
 import 'package:instax/widget/customCheckBox.dart';
 import 'package:instax/widget/switchThemeColor.dart';
-import 'package:instax/widget/customButton.dart';
-
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
@@ -38,7 +33,7 @@ class GenderScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "คุณเป็น",
+                      "เพศ",
                       style:
                           TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     ),
@@ -84,7 +79,7 @@ class GenderScreen extends StatelessWidget {
                           },
                           child: const Text(
                             "ข้ามไปก่อน",
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16, color: Colors.black),
                           )),
                     )
                   ],

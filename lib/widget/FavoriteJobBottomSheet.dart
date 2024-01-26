@@ -22,9 +22,8 @@ class FavoriteJobBottomSheet extends StatelessWidget {
       body: BlocBuilder<SubJobBloc, SubJobState>(builder: (context, state) {
         // get sub job by parentJob
         final subjobByParentJob = state.subJobs
-            .where((element) => element.jobParentId == job.jobId)
+            .where((element) => element.parentId == job.parentId)
             .toList();
-
         return Stack(children: [
           SingleChildScrollView(
             child: Column(
@@ -39,7 +38,8 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                     topRight: Radius.circular(20.0),
                   ),
                   child: Image(
-                    image: NetworkImage(job.imageUrl),
+                    image: AssetImage(
+                        job.icon ?? 'assets/images/construction_image.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -50,7 +50,7 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        job.jobName,
+                        job.name,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -210,7 +210,7 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        Text(subJob.subJobName),
+                        Text(subJob.name),
                       ],
                     ),
                   );
@@ -233,7 +233,7 @@ class FavoriteJobBottomSheet extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-                child: ElevatedButton(
+                child: FilledButton(
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

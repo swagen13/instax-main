@@ -11,6 +11,7 @@ class SubJobBloc extends Bloc<SubJobEvent, SubJobState> {
       try {
         print('event.jobIds : ${event.jobIds}');
         final subJobs = await _jobRepository.getSubjobByJobIds(event.jobIds);
+        print('subJobs : $subJobs');
 
         emit(state.copyWith(
           status: SubJobStatus.success,
@@ -18,7 +19,7 @@ class SubJobBloc extends Bloc<SubJobEvent, SubJobState> {
         ));
       } catch (e) {
         print('error : ${e.toString()}');
-        emit(state.copyWith(status: SubJobStatus.failure));
+        // emit(state.copyWith(status: SubJobStatus.failure));
       }
     });
   }

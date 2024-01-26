@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:instax/blocs/image_bloc/image_bloc.dart';
 import 'package:instax/blocs/image_bloc/image_event.dart';
 import 'package:instax/blocs/image_bloc/image_state.dart';
+import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
+import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
 
 // ignore: must_be_immutable
 class ImageUploadScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class ImageUploadScreen extends StatelessWidget {
       // ignore: use_build_context_synchronously
       context.read<ImageSelectionBloc>().add(
             ImageSelectedEvent(
-              selectedImage: File(image.path),
+              selectedImage: _selectedImage!,
             ),
           );
     }
@@ -29,9 +31,14 @@ class ImageUploadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ImageSelectionBloc, ImageSelectionState>(
-        builder: (context, state) {
-          print('state.selectedImage ${state.selectedImage}');
+      body: BlocConsumer<ImageSelectionBloc, ImageSelectionState>(
+        listener: (context, imageState) {
+          if (imageState.status == ImageStatus.success) {
+            Navigator.pushNamed(context, 'workType');
+          }
+        },
+        builder: (context, imageState) {
+          print('state.selectedImage ${imageState.selectedImage}');
           return Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
             child: Center(
@@ -39,7 +46,7 @@ class ImageUploadScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
-                    height: 150,
+                    height: 100,
                   ),
                   const Text(
                     "รูปโปรไฟล์ของคุณ",
@@ -58,12 +65,10 @@ class ImageUploadScreen extends StatelessWidget {
                           width: 250,
                           height: 300,
                           decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer,
+                            color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                              color: const Color.fromRGBO(217, 218, 222, 1),
+                              color: Theme.of(context).colorScheme.outline,
                               width: 1,
                             ),
                           ),
@@ -80,21 +85,14 @@ class ImageUploadScreen extends StatelessWidget {
                                         height: 80,
                                       ),
                                       Container(
+                                        width: 60,
+                                        height: 60,
                                         decoration: BoxDecoration(
                                           color: Theme.of(context)
                                               .colorScheme
                                               .primary,
                                           borderRadius:
-                                              BorderRadius.circular(35),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 1,
-                                              blurRadius: 3,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
+                                              BorderRadius.circular(5),
                                         ),
                                         child: InkWell(
                                           onTap: () {
@@ -103,18 +101,18 @@ class ImageUploadScreen extends StatelessWidget {
                                           child: const Icon(
                                             Icons.add,
                                             color: Colors.white,
-                                            size: 60,
+                                            size: 30,
                                           ),
                                         ),
                                       ),
                                       const SizedBox(
-                                        height: 100,
+                                        height: 105,
                                       ),
-                                      ElevatedButton(
+                                      FilledButton(
                                         style: ButtonStyle(
                                           minimumSize:
                                               MaterialStateProperty.all<Size>(
-                                                  const Size(225, 35)),
+                                                  const Size(225, 40)),
                                           shape: MaterialStateProperty.all<
                                               RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
@@ -130,8 +128,8 @@ class ImageUploadScreen extends StatelessWidget {
                                         child: const Text(
                                           'อัพโหลดรูป',
                                           style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -139,7 +137,7 @@ class ImageUploadScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (state.selectedImage != null)
+                      if (imageState.selectedImage != null)
                         Positioned(
                           child: Stack(
                             children: [
@@ -151,7 +149,8 @@ class ImageUploadScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
-                                      image: FileImage(state.selectedImage!),
+                                      image:
+                                          FileImage(imageState.selectedImage!),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -181,26 +180,28 @@ class ImageUploadScreen extends StatelessWidget {
                                 bottom: 5, // Adjust the bottom value as needed
                                 right: 65, // Adjust the right value as needed
                                 left: 65,
-                                child: ElevatedButton(
+                                child: OutlinedButton(
                                   onPressed: () {
                                     _openGallery(context);
                                   },
                                   style: ButtonStyle(
+                                    side: MaterialStateProperty.all(
+                                      const BorderSide(
+                                        color: Colors.white,
+                                        width: 1,
+                                      ),
+                                    ),
                                     shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(50),
-                                        side: const BorderSide(
-                                          color: Colors
-                                              .white, // Set the border color here
-                                          width: 1.0, // Set the border width
-                                        ),
                                       ),
                                     ),
                                   ),
                                   child: const Text(
                                     'เปลี่ยนรูป',
                                     style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -220,6 +221,7 @@ class ImageUploadScreen extends StatelessWidget {
                     text: const TextSpan(
                       text: 'โปรดเลือกรูปที่',
                       style: TextStyle(
+                        color: Colors.black,
                         fontSize: 16,
                         fontFamily: 'NotoSansThai',
                       ),
@@ -227,6 +229,7 @@ class ImageUploadScreen extends StatelessWidget {
                         TextSpan(
                           text: 'แสดงความเป็นตัวตน',
                           style: TextStyle(
+                            color: Color.fromRGBO(0, 86, 210, 1),
                             fontSize: 16,
                           ),
                         ),
@@ -236,7 +239,52 @@ class ImageUploadScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  imageState.selectedImage != null
+                      ? BlocBuilder<MyUserBloc, MyUserState>(
+                          builder: (context, myUserState) {
+                            return FilledButton(
+                              style: ButtonStyle(
+                                minimumSize: MaterialStateProperty.all<Size>(
+                                    const Size(225, 40)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                // upload image to firebase storage
+                                context.read<ImageSelectionBloc>().add(
+                                      UploadImageEvent(
+                                        selectedImage:
+                                            imageState.selectedImage!,
+                                        uid: myUserState.myUser.uid,
+                                      ),
+                                    );
+                              },
+                              child: imageState.status == ImageStatus.loading
+                                  ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const Text(
+                                      'ยืนยัน',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                            );
+                          },
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

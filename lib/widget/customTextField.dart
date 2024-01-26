@@ -16,11 +16,12 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    print('controller: $controller');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(prefixText,
-            style: const TextStyle(fontSize: 15)), // Apply text color here
+        Text(prefixText, style: const TextStyle(fontSize: 15)),
         const SizedBox(height: 5),
         Container(
           decoration: BoxDecoration(
@@ -28,15 +29,16 @@ class CustomTextField extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
-            enabled: !isDisabled,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
               hintText: hintText,
               contentPadding: EdgeInsets.symmetric(horizontal: 10),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 34, 82, 255),
-                  width: 1.0,
+                borderSide: BorderSide(
+                  color: primaryColor,
+                  width: 2,
                 ),
               ),
               disabledBorder: OutlineInputBorder(
@@ -55,7 +57,7 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

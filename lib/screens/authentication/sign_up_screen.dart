@@ -229,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 MyUser myUser = MyUser.empty;
                                 myUser = myUser.copyWith(
                                   email: emailController.text,
-                                  name: nameController.text,
+                                  displayName: nameController.text,
                                 );
 
                                 setState(() {
