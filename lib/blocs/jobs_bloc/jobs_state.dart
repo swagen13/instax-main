@@ -8,13 +8,13 @@ class JobState extends Equatable {
     this.jobs = const <Job>[],
     this.status = JobStatus.initial,
     this.selectedJobs = const <Job>[],
-    this.selectedSubJobs = const <SubJob>[],
+    this.selectedSubJobs = const <Job>[],
   });
 
   final List<Job> jobs;
   final JobStatus status;
   final List<Job> selectedJobs;
-  final List<SubJob> selectedSubJobs;
+  final List<Job> selectedSubJobs;
 
   @override
   List<Object> get props => [jobs, status, selectedJobs, selectedSubJobs];
@@ -23,7 +23,7 @@ class JobState extends Equatable {
     List<Job>? jobs,
     JobStatus? status,
     List<Job>? selectedJobs,
-    List<SubJob>? selectedSubJobs,
+    List<Job>? selectedSubJobs,
   }) {
     return JobState(
       jobs: jobs ?? this.jobs,

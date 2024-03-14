@@ -1,13 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
+import 'package:instax/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:instax/blocs/image_bloc/image_bloc.dart';
 import 'package:instax/blocs/image_bloc/image_event.dart';
 import 'package:instax/blocs/image_bloc/image_state.dart';
-import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
-import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
 
 // ignore: must_be_immutable
 class ImageUploadScreen extends StatelessWidget {
@@ -48,10 +47,11 @@ class ImageUploadScreen extends StatelessWidget {
                   const SizedBox(
                     height: 100,
                   ),
-                  const Text(
+                  Text(
                     "รูปโปรไฟล์ของคุณ",
                     style: TextStyle(
-                      fontSize: 35,
+                      fontSize:
+                          Theme.of(context).textTheme.displaySmall?.fontSize,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -125,10 +125,13 @@ class ImageUploadScreen extends StatelessWidget {
                                           Navigator.pushNamed(
                                               context, '/workType');
                                         },
-                                        child: const Text(
+                                        child: Text(
                                           'อัพโหลดรูป',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.fontSize,
                                           ),
                                         ),
                                       ),
@@ -198,11 +201,14 @@ class ImageUploadScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'เปลี่ยนรูป',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.fontSize,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -218,11 +224,12 @@ class ImageUploadScreen extends StatelessWidget {
                   ),
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'โปรดเลือกรูปที่',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge?.fontSize,
                         fontFamily: 'NotoSansThai',
                       ),
                       children: <TextSpan>[
@@ -230,7 +237,10 @@ class ImageUploadScreen extends StatelessWidget {
                           text: 'แสดงความเป็นตัวตน',
                           style: TextStyle(
                             color: Color.fromRGBO(0, 86, 210, 1),
-                            fontSize: 16,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .fontSize,
                           ),
                         ),
                         TextSpan(
@@ -244,7 +254,7 @@ class ImageUploadScreen extends StatelessWidget {
                     height: 20,
                   ),
                   imageState.selectedImage != null
-                      ? BlocBuilder<MyUserBloc, MyUserState>(
+                      ? BlocBuilder<AuthenticationBloc, AuthenticationState>(
                           builder: (context, myUserState) {
                             return FilledButton(
                               style: ButtonStyle(
@@ -258,12 +268,13 @@ class ImageUploadScreen extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                // upload image to firebase storage
+                                Navigator.pushNamed(context, 'workType');
+                                // // upload image to firebase storage
                                 context.read<ImageSelectionBloc>().add(
                                       UploadImageEvent(
                                         selectedImage:
                                             imageState.selectedImage!,
-                                        uid: myUserState.myUser.uid,
+                                        uid: myUserState.user!.uid,
                                       ),
                                     );
                               },
@@ -275,10 +286,13 @@ class ImageUploadScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                     )
-                                  : const Text(
+                                  : Text(
                                       'ยืนยัน',
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.fontSize,
                                       ),
                                     ),
                             );

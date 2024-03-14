@@ -46,9 +46,12 @@ class WorkTypeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 100),
-                    const Text("ประเภทงานที่สนใจ",
+                    Text("ประเภทงานที่สนใจ",
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .displaySmall!
+                              .fontSize,
                           fontWeight: FontWeight.bold,
                         )),
                     const SizedBox(height: 10),
@@ -72,7 +75,9 @@ class WorkTypeScreen extends StatelessWidget {
                                     image: AssetImage(job.icon ??
                                         'assets/images/construction_image.jpg'),
                                     fit: BoxFit.cover,
-                                    height: 95,
+                                    // width = full width / 2
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.3,
                                   ),
                                 ),
                                 Positioned(
@@ -98,8 +103,11 @@ class WorkTypeScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           job.name,
-                                          style: const TextStyle(
-                                            fontSize: 16,
+                                          style: TextStyle(
+                                            fontSize: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .fontSize,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),

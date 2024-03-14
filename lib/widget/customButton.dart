@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
         ),
       ),
       style: ButtonStyle(

@@ -24,7 +24,7 @@ class DisplayNameScreen extends StatelessWidget {
         builder: (context, state) {
           // Initialize the _nameController text with the value from state.myUser.name
           if (_nameController.text.isEmpty) {
-            _nameController.text = state.myUser.displayName;
+            _nameController.text = state.myUser.displayName!;
           }
 
           return Padding(
@@ -34,17 +34,18 @@ class DisplayNameScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 50),
-                const Text(
+                Text(
                   'ชื่อเล่น',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize:
+                        Theme.of(context).textTheme.displaySmall?.fontSize,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 5),
-                const Text("ชื่อเล่นของคุณที่ใช้ใน App ของเรา",
+                Text("ชื่อเล่นของคุณที่ใช้ใน App ของเรา",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
                     )),
                 CustomTextField(
                   controller: _nameController,
@@ -62,6 +63,7 @@ class DisplayNameScreen extends StatelessWidget {
                             ),
                           ),
                         );
+                    Navigator.pushNamed(context, 'image');
                   },
                   text: "ดำเนินการต่อ",
                 ),
@@ -71,9 +73,12 @@ class DisplayNameScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, 'image');
                     },
-                    child: const Text(
+                    child: Text(
                       "ข้ามไปก่อน",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge?.fontSize,
+                          color: Colors.black),
                     ),
                   ),
                 )

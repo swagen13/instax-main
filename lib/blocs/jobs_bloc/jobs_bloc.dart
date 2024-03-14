@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_event.dart';
 import 'package:instax/blocs/jobs_bloc/jobs_state.dart';
@@ -24,7 +22,6 @@ class JobBloc extends Bloc<JobEvent, JobState> {
         status: JobStatus.loading,
       ));
       try {
-        print('event.selectedJobs ${event.selectedJobs}');
         emit(state.copyWith(
             status: JobStatus.success, selectedJobs: event.selectedJobs));
       } catch (e) {
@@ -38,7 +35,6 @@ class JobBloc extends Bloc<JobEvent, JobState> {
         status: JobStatus.loading,
       ));
       try {
-        print('event.selectedJobs ${event.selectedSubJobs}');
         emit(state.copyWith(
             status: JobStatus.success, selectedSubJobs: event.selectedSubJobs));
       } catch (e) {

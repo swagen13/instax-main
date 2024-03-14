@@ -10,7 +10,28 @@ abstract class UserRepository {
 
   Future<void> signInWithFacebook();
 
+  Future<void> linkingAccount(AuthCredential? facebookAuth);
+
+  Future<void> signInWithGoogle();
+
+  Future<void> signInWithLine();
+
+  Future<void> signInWithAnonymously();
+
+  Future<String> phonVerify(String phoneNumber);
+
+  Future<void> verifyOTP(
+      String phoneNumber, String verificationId, String smsCode);
+
+  Future<String> sendVerificationMessage(
+      MultiFactorResolver? multiFactorResolver);
+
+  Future<void> multiFactorVerification(String verificationId, String smsCode,
+      MultiFactorResolver? multiFactorResolver);
+
   Future<void> logOut();
+
+  Future<void> sendEmailVerification();
 
   Future<MyUser> signUp(MyUser myUser, String password);
 
@@ -22,5 +43,9 @@ abstract class UserRepository {
 
   Future<MyUser> getMyUser(String myUserId);
 
-  Future<void> uploadPicture(File imageFile, String userId);
+  Future<void> uploadPicture(File imageFile, String? userId);
+
+  Future<void> onlineStateChange(bool isOnline);
+
+  Future<void> inChatStateChange(bool isOnline);
 }

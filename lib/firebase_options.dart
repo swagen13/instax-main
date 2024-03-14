@@ -54,7 +54,8 @@ class DefaultFirebaseOptions {
     appId: '1:483434719398:android:2f0c677e97158268d6ac67',
     messagingSenderId: '483434719398',
     projectId: 'plawarn-6704c',
-    databaseURL: 'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'plawarn-6704c.appspot.com',
   );
 
@@ -63,10 +64,13 @@ class DefaultFirebaseOptions {
     appId: '1:483434719398:ios:df2c12e86f007628d6ac67',
     messagingSenderId: '483434719398',
     projectId: 'plawarn-6704c',
-    databaseURL: 'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://plawarn-6704c-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'plawarn-6704c.appspot.com',
-    androidClientId: '483434719398-06hl0h7o7188kh8uupe6b61lb51k1c25.apps.googleusercontent.com',
-    iosClientId: '483434719398-pad1b4ipc2i64ke21s9sb4i1ur1ck03r.apps.googleusercontent.com',
+    androidClientId:
+        '483434719398-06hl0h7o7188kh8uupe6b61lb51k1c25.apps.googleusercontent.com',
+    iosClientId:
+        '483434719398-pad1b4ipc2i64ke21s9sb4i1ur1ck03r.apps.googleusercontent.com',
     iosBundleId: 'com.example.instax',
   );
 }

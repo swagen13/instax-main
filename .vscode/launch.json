@@ -5,10 +5,53 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "SM A730F",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "2a9c90d41e0d7ece"
+    },
+    {
+      "name": "SM A920F",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "52008067ee7c6555"
+    },
+    {
+      "name": "Android 13 (API 33)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "Android 14 (API 34)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "emulator-5556"
+    },
+    {
+      "name": "$wagenz•~",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "00008110-000919A41145801E"
+    },
+    {
       "name": "iPhone 15 Pro",
       "request": "launch",
       "type": "dart",
       "deviceId": "7DC69F34-C695-4E6A-828B-6367455CF384"
+    },
+    {
+      "name": "iPhone 15 Pro Max",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "1688DE1B-CEA7-4518-B317-EAD1AB43D932",
+      "flutterMode": "release"
+    },
+    {
+      "name": "iPhone 15 Plus",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "29C6ECE3-325B-46BA-ADB5-18A4A663F8EA"
     },
     {
       "name": "instax-main",

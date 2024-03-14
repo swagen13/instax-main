@@ -14,20 +14,20 @@ class OnBoard extends StatelessWidget {
             const SizedBox(height: 150),
             const Image(image: AssetImage('assets/images/logo.png')),
             const SizedBox(height: 100),
-            const Text(
+            Text(
               'ยินดีต้อนรับสู่ปลาวาฬ',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 30,
+                fontSize: Theme.of(context).textTheme.displaySmall?.fontSize,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'ค้นหางานหรือจ้างงาน ฟรีไม่มีค่าใช้จ่าย',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 15,
+                fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
               ),
             ),
             const SizedBox(
@@ -49,9 +49,11 @@ class OnBoard extends StatelessWidget {
                       BorderRadius.circular(10), // Adjust the radius as needed
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'ดำเนินการต่อ',
-                style: TextStyle(fontSize: 15, color: Colors.black),
+                style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                    color: Colors.black),
               ),
             ),
           ],

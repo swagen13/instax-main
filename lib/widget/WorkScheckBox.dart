@@ -70,7 +70,9 @@ class _WorkCheckboxesState extends State<WorkCheckboxes> {
                     width: 8.0), // Adjust spacing between checkbox and title
                 Text(
                   widget.availableWorks[index],
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(
+                      fontSize:
+                          Theme.of(context).textTheme.bodyLarge?.fontSize),
                 ),
               ],
             ),

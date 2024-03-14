@@ -16,6 +16,15 @@ class GetMyUser extends MyUserEvent {
   List<Object> get props => [myUserId];
 }
 
+class GetUserData extends MyUserEvent {
+  final String myUserId;
+
+  const GetUserData({required this.myUserId});
+
+  @override
+  List<Object> get props => [myUserId];
+}
+
 abstract class UpdateUserInfoEvent extends Equatable {
   const UpdateUserInfoEvent();
 

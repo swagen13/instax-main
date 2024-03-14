@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:instax/providers/temporary_gender_provider.dart';
 import 'package:instax/providers/temporary_username_password_provider.dart';
 import 'package:instax/screens/authentication/sign_up_screen.dart';
-
-// import '../../components/strings.dart';
-import '../../components/textfield.dart';
-
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
@@ -60,23 +56,24 @@ class SignInScreen extends StatelessWidget {
                     onPressed: () {
                       // print('Sign In');
                       // Handle sign-in based on the state
-                      if (state is! SignInProcess) {
-                        context.read<SignInBloc>().add(
-                              SignInRequired(
-                                'emailController.text',
-                                'passwordController.text',
-                              ),
-                            );
-                      }
+                      if (state != SignInStatus.success)
+                        () {
+                          context.read<SignInBloc>().add(
+                                const SignInRequired(
+                                  'emailController.text',
+                                  'passwordController.text',
+                                ),
+                              );
+                        };
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 3.0,
-                      primary: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(60),
                       ),
                     ),
-                    child: const Padding(
+                    child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                       child: Text(
@@ -84,7 +81,8 @@ class SignInScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge?.fontSize,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

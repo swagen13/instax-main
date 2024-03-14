@@ -79,7 +79,8 @@ class _CustomButtonState extends State<CustomButton> {
       ),
       child: Text(
         widget.text,
-        style: TextStyle(fontSize: 17),
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
       ),
     );
   }

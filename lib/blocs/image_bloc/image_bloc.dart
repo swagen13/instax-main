@@ -1,9 +1,8 @@
-import 'dart:io';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/image_bloc/image_event.dart';
 import 'package:instax/blocs/image_bloc/image_state.dart';
-import 'package:flutter/material.dart';
 import 'package:user_repository/user_repository.dart';
 
 class ImageSelectionBloc
@@ -44,6 +43,32 @@ class ImageSelectionBloc
           ),
         );
       }
+    });
+
+    on<ImageSelectedInChat>((event, emit) async {
+      print('ImageSelectedInChat');
+      log('ImageSelectedInChat: ${state.selectedImageInChat.length}');
+
+      emit(
+        ImageSelectionState(
+          selectedImageInChat: [
+            ...state.selectedImageInChat,
+            event.selectedImage,
+          ],
+        ),
+      );
+      log('ImageSelectedInChat: ${state.selectedImageInChat.length}');
+    });
+
+    on<RemoveImageInChat>((event, emit) async {
+      emit(
+        ImageSelectionState(
+          selectedImageInChat: [
+            ...state.selectedImageInChat
+                .where((element) => element != event.selectedImage),
+          ],
+        ),
+      );
     });
   }
 }

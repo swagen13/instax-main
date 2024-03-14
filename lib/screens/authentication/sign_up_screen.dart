@@ -245,7 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(60))),
-                            child: const Padding(
+                            child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 25, vertical: 5),
                               child: Text(
@@ -253,7 +253,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.fontSize,
                                     fontWeight: FontWeight.w600),
                               ),
                             )),

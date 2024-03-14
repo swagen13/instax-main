@@ -3,19 +3,25 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 
 class TemporaryOTPProvider with ChangeNotifier {
-  String _otpText = '';
+  List<String> _otpDigits =
+      List.filled(6, ''); // Initialize with 6 empty strings
   late List<FocusNode> focusNodes;
 
   TemporaryOTPProvider() {
     focusNodes = List.generate(6, (index) => FocusNode());
   }
 
-  String get otpText => _otpText;
+  List<String> get otpDigits => _otpDigits;
 
-  void setOTPText(String value) {
-    _otpText = value;
-    notifyListeners();
+  void setOTPText(String value, int index) {
+    if (index >= 0 && index < _otpDigits.length) {
+      _otpDigits[index] = value;
+      notifyListeners();
+    }
   }
+
+  String get otpText =>
+      _otpDigits.join(); // Join the digits into a single string
 
   void dispose() {
     for (var focusNode in focusNodes) {

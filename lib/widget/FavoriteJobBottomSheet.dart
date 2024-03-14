@@ -16,7 +16,7 @@ class FavoriteJobBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var temporaryGenderProvider =
+    var temporarySelectedSubJobs =
         Provider.of<TemporarySelectedSubJobsProvider>(context);
     return Scaffold(
       body: BlocBuilder<SubJobBloc, SubJobState>(builder: (context, state) {
@@ -51,8 +51,11 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         job.name,
-                        style: const TextStyle(
-                          fontSize: 30,
+                        style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .displaySmall!
+                              .fontSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -91,12 +94,16 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             '5',
-                            style: TextStyle(fontSize: 30),
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .fontSize),
                           ),
                           Text('งานใหม่')
                         ],
@@ -121,12 +128,16 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             '1,000',
-                            style: TextStyle(fontSize: 30),
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .fontSize),
                           ),
                           Text('สมาชิก/ช่าง')
                         ],
@@ -142,12 +153,13 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     "งานเฉพาะทาง",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize:
+                          Theme.of(context).textTheme.displaySmall!.fontSize,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -165,11 +177,11 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                   return ListTile(
                     onTap: () {
                       // add unique subjob to selectedSubJobs
-                      if (!temporaryGenderProvider.selectedSubJobs
+                      if (!temporarySelectedSubJobs.selectedSubJobs
                           .contains(subJob)) {
-                        temporaryGenderProvider.addSelectedSubJob(subJob);
+                        temporarySelectedSubJobs.addSelectedSubJob(subJob);
                       } else {
-                        temporaryGenderProvider.removeSelectedSubJob(subJob);
+                        temporarySelectedSubJobs.removeSelectedSubJob(subJob);
                       }
                     },
                     title: Row(
@@ -186,11 +198,11 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                                 border: Border.all(
                                   color:
                                       provider.selectedSubJobs.contains(subJob)
-                                          ? Color.fromRGBO(0, 86, 210, 1)
+                                          ? Theme.of(context).primaryColor
                                           : Colors.grey[200]!,
                                 ),
                                 color: provider.selectedSubJobs.contains(subJob)
-                                    ? Color.fromRGBO(0, 86, 210, 1)
+                                    ? Theme.of(context).primaryColor
                                     : Colors.grey[200],
                               ),
                               child: Center(
@@ -241,17 +253,18 @@ class FavoriteJobBottomSheet extends StatelessWidget {
                     ),
                   )),
                   onPressed: () {
-                    print(temporaryGenderProvider.selectedSubJobs);
+                    print(temporarySelectedSubJobs.selectedSubJobs);
 
                     context.read<JobBloc>().add(SubJobSelected(
                         selectedSubJobs:
-                            temporaryGenderProvider.selectedSubJobs));
+                            temporarySelectedSubJobs.selectedSubJobs));
 
                     Navigator.pop(context);
                   },
-                  child: const Text('เข้าร่วมประเภทงานนี้',
+                  child: Text('เข้าร่วมประเภทงานนี้',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge!.fontSize,
                         fontWeight: FontWeight.bold,
                       )),
                 ),

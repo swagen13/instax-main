@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
 import 'package:job_repository/job_repository.dart';
 
@@ -22,7 +20,7 @@ class JobSelected extends JobEvent {
 }
 
 class SubJobSelected extends JobEvent {
-  final List<SubJob> selectedSubJobs;
+  final List<Job> selectedSubJobs;
 
   const SubJobSelected({required this.selectedSubJobs});
 

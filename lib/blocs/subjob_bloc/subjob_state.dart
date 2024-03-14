@@ -5,18 +5,18 @@ enum SubJobStatus { initial, success, loading, failure }
 
 class SubJobState extends Equatable {
   const SubJobState({
-    this.subJobs = const <SubJob>[],
+    this.subJobs = const <Job>[],
     this.status = SubJobStatus.initial,
   });
 
-  final List<SubJob> subJobs;
+  final List<Job> subJobs;
   final SubJobStatus status;
 
   @override
   List<Object> get props => [subJobs, status];
 
   SubJobState copyWith({
-    List<SubJob>? subJobs,
+    List<Job>? subJobs,
     SubJobStatus? status,
   }) {
     return SubJobState(

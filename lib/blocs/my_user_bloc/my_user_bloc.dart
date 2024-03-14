@@ -19,7 +19,7 @@ class MyUserBloc extends Bloc<MyUserEvent, MyUserState> {
         print('myUser $myUser');
         emit(state.copyWith(status: MyUserStatus.success, myUser: myUser));
       } catch (e) {
-        print('error : ${e.toString()}');
+        print('errors : ${e.toString()}');
         emit(state.copyWith(status: MyUserStatus.failure));
       }
     });
@@ -27,10 +27,21 @@ class MyUserBloc extends Bloc<MyUserEvent, MyUserState> {
     on<UpdateMyUser>((event, emit) async {
       try {
         await _userRepository.updateUserData(event.myUser);
+
         emit(
             state.copyWith(status: MyUserStatus.success, myUser: event.myUser));
       } catch (e) {
         log(e.toString());
+        emit(state.copyWith(status: MyUserStatus.failure));
+      }
+    });
+    on<GetUserData>((event, emit) async {
+      try {
+        final myUser = await _userRepository.getMyUser(event.myUserId);
+        print('myUser $myUser');
+        emit(state.copyWith(status: MyUserStatus.success, myUser: myUser));
+      } catch (e) {
+        print('errors : ${e.toString()}');
         emit(state.copyWith(status: MyUserStatus.failure));
       }
     });

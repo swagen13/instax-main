@@ -5,6 +5,7 @@ class JobPostEntity {
   String subJob;
   String position;
   String wage;
+  bool isSelected;
 
   JobPostEntity({
     required this.id,
@@ -13,6 +14,7 @@ class JobPostEntity {
     required this.subJob,
     required this.position,
     required this.wage,
+    this.isSelected = false,
   });
 
   Map<String, Object?> toDocument() {
@@ -23,6 +25,7 @@ class JobPostEntity {
       'subJob': subJob,
       'position': position,
       'wage': wage,
+      'isSelected': isSelected,
     };
   }
 
@@ -34,11 +37,12 @@ class JobPostEntity {
       subJob: doc['subJob'] as String,
       position: doc['position'] as String,
       wage: doc['wage'] as String,
+      isSelected: doc['isSelected'] as bool,
     );
   }
 
   List<Object?> get props =>
-      [id, description1, description2, subJob, position, wage];
+      [id, description1, description2, subJob, position, wage, isSelected];
 
   @override
   String toString() {
@@ -49,6 +53,7 @@ class JobPostEntity {
       subJob: $subJob
       position: $position
       wage: $wage
+      isSelected: $isSelected
     }''';
   }
 }

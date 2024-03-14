@@ -11,7 +11,7 @@ import 'package:job_repository/job_repository.dart';
 
 // ignore: must_be_immutable
 class FavoriteJob extends StatelessWidget {
-  late List<SubJob> subjobs = [];
+  late List<Job> subjobs = [];
 
   FavoriteJob({super.key});
 
@@ -39,10 +39,11 @@ class FavoriteJob extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "ประเภทงานที่สนใจ",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize:
+                            Theme.of(context).textTheme.displaySmall!.fontSize,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -102,16 +103,21 @@ class FavoriteJob extends StatelessWidget {
                                       children: [
                                         Text(
                                           job.name,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 30,
+                                            fontSize: Theme.of(context)
+                                                .textTheme
+                                                .displaySmall!
+                                                .fontSize,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         BlocBuilder<SubJobBloc, SubJobState>(
                                           builder: (context, subJobState) {
                                             if (subJobState.status ==
-                                                SubJobStatus.success) {
+                                                    SubJobStatus.success &&
+                                                subJobState
+                                                    .subJobs.isNotEmpty) {
                                               return SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
@@ -132,11 +138,14 @@ class FavoriteJob extends StatelessWidget {
                                                               job.parentId
                                                           ? Text(
                                                               '${subJob.name}${isLastItem ? '' : ','}',
-                                                              style:
-                                                                  const TextStyle(
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .white,
-                                                                fontSize: 16,
+                                                                fontSize: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyLarge!
+                                                                    .fontSize,
                                                               ),
                                                             )
                                                           : const SizedBox(),

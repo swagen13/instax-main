@@ -33,8 +33,9 @@ class CustomCheckbox extends StatelessWidget {
                 children: [
                   Text(
                     value,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                    ),
                   ),
                   const Spacer(),
                   Container(

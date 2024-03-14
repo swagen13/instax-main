@@ -5,11 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/phone_number_bloc/phone_number_bloc.dart';
 import 'package:instax/blocs/phone_number_bloc/phone_number_event.dart';
 import 'package:instax/blocs/phone_number_bloc/phone_number_state.dart';
-import 'package:instax/blocs/theme_bloc/theme_bloc.dart';
-import 'package:instax/blocs/theme_bloc/theme_event.dart';
-import 'package:instax/blocs/theme_bloc/theme_state.dart';
+import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:instax/widget/customButton.dart';
-import 'package:instax/widget/switchThemeColor.dart';
 
 class PhoneVerify extends StatelessWidget {
   const PhoneVerify({super.key});
@@ -18,30 +15,48 @@ class PhoneVerify extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ยืนยันเบอร์โทร'),
         centerTitle: true,
-        actions: [SwitchThemeColor()],
+        actions: [
+          ElevatedButton.icon(
+              onPressed: () {
+                context.read<SignInBloc>().add(const SignOutRequired());
+              },
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: BlocBuilder<PhoneNumberBloc, PhoneNumberState>(
+        child: BlocConsumer<PhoneNumberBloc, PhoneNumberState>(
+          listener: (context, state) {
+            if (state.status == PhoneNumberStatus.success &&
+                // ignore: unnecessary_null_comparison
+                state.verificationId != null) {
+              // router to otp screen
+              Navigator.pushNamed(context, 'otp_screen');
+            }
+          },
           builder: (context, state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 150),
-                const Text("ยืนยันเบอร์โทร",
+                Text("ยืนยันเบอร์โทร",
                     style: TextStyle(
-                      fontSize: 35,
+                      fontSize:
+                          Theme.of(context).textTheme.displayLarge?.fontSize,
                       fontWeight: FontWeight.bold,
                     )),
                 const SizedBox(height: 5),
-                const Text("เพื่อปกป้องบัญชีและเพื่อยืนยันตัวตนของคุณ",
+                Text("เพื่อปกป้องบัญชีและเพื่อยืนยันตัวตนของคุณ",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
                     )),
                 const SizedBox(height: 50),
-                const Text("เบอร์โทรศัพท์", style: TextStyle(fontSize: 17)),
+                Text("เบอร์โทรศัพท์",
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge?.fontSize)),
                 const SizedBox(height: 10),
                 TextField(
                   onChanged: (value) {
@@ -49,8 +64,8 @@ class PhoneVerify extends StatelessWidget {
                         .read<PhoneNumberBloc>()
                         .add(UpdatePhoneNumber(value));
                   },
-                  style: const TextStyle(
-                    fontSize: 18,
+                  style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
                   ),
                   decoration: InputDecoration(
                     hintText: '08X-XXXXXXX',
@@ -69,7 +84,16 @@ class PhoneVerify extends StatelessWidget {
                 const SizedBox(height: 20),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'otp_screen');
+                    print(state.phoneNumber);
+                    // format phone number for +66
+                    final String formattedPhoneNumber =
+                        formatPhoneNumber(state.phoneNumber);
+
+                    print(formattedPhoneNumber);
+
+                    context.read<PhoneNumberBloc>().add(PhoneVerifyRequired(
+                          formattedPhoneNumber,
+                        ));
                   },
                   text: 'ดำเนินการต่อ',
                 )
@@ -79,5 +103,10 @@ class PhoneVerify extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatPhoneNumber(String phoneNumber) {
+    final String formattedPhoneNumber = phoneNumber.replaceAll('-', '');
+    return '+66' + formattedPhoneNumber.substring(1);
   }
 }

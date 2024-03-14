@@ -1,5 +1,7 @@
 // post_bloc.dart
 import 'dart:developer';
+
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:instax/blocs/post_bloc/post_event.dart';
 import 'package:instax/blocs/post_bloc/post_state.dart';
@@ -45,6 +47,18 @@ class PostBloc extends Bloc<PostEvent, PostState> {
             post.postId == event.post.postId); // Remove from local list
         emit(state.copyWith(
             status: PostStatus.success, posts: List.of(localPosts)));
+      } catch (e) {
+        emit(state.copyWith(status: PostStatus.failure));
+      }
+    });
+
+    on<SelectSubjobForPost>((event, emit) async {
+      try {
+        // Assuming there's a method like deletePost in your repository
+        log('Subjob selected: ${event.subJobs}');
+        // emit(state.copyWith(
+        //     status: PostStatus.success,
+        //     selectSubJobs: List.of(event.subJobs as Iterable<SubJob>)));
       } catch (e) {
         emit(state.copyWith(status: PostStatus.failure));
       }

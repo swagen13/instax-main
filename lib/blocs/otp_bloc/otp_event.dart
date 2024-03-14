@@ -15,3 +15,18 @@ class UpdateOTP extends OTPEvent {
   @override
   List<Object> get props => [otp];
 }
+
+class VerifyOTP extends OTPEvent {
+  final String phoneNumber;
+  final String verificationId;
+  final String smsCode;
+
+  const VerifyOTP(
+    this.phoneNumber,
+    this.verificationId,
+    this.smsCode,
+  );
+
+  @override
+  List<Object> get props => [phoneNumber, verificationId, smsCode];
+}

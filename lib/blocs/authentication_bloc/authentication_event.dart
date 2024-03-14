@@ -1,15 +1,24 @@
 part of 'authentication_bloc.dart';
 
-@immutable
 abstract class AuthenticationEvent extends Equatable {
-	const AuthenticationEvent();
-
-	@override
-  List<Object> get props => [];
+  const AuthenticationEvent();
 }
 
 class AuthenticationUserChanged extends AuthenticationEvent {
+  final User? user;
+
   const AuthenticationUserChanged(this.user);
 
-  final User? user;
+  @override
+  List<Object?> get props => [user];
+}
+
+class AuthCheckRequested extends AuthenticationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthenticationReload extends AuthenticationEvent {
+  @override
+  List<Object?> get props => [];
 }

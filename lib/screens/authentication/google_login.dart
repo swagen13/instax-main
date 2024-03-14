@@ -9,7 +9,6 @@ class MyFormScreen extends StatefulWidget {
 
 class _MyFormScreenState extends State<MyFormScreen> {
   String _buttonText = 'Submit';
-  Color _buttonColor = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,6 @@ class _MyFormScreenState extends State<MyFormScreen> {
               onPressed: () {
                 setState(() {
                   _buttonText = 'Submit';
-                  _buttonColor = Colors.blue;
                 });
               },
               child: const Text('Update Button Properties'),
@@ -42,7 +40,6 @@ class _MyFormScreenState extends State<MyFormScreen> {
               onPressed: () {
                 setState(() {
                   _buttonText = 'Updated Text';
-                  _buttonColor = Colors.red;
                 });
               },
               child: const Text('Update Button Properties'),

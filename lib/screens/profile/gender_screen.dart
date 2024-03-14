@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_state.dart';
+import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:instax/providers/temporary_gender_provider.dart';
 import 'package:instax/widget/customButton.dart';
 import 'package:instax/widget/customCheckBox.dart';
-import 'package:instax/widget/switchThemeColor.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
@@ -17,8 +17,13 @@ class GenderScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          actions: const [
-            SwitchThemeColor(),
+          actions: [
+            ElevatedButton.icon(
+                onPressed: () {
+                  context.read<SignInBloc>().add(SignOutRequired());
+                },
+                icon: Icon(Icons.logout),
+                label: Text('Logout'))
           ],
         ),
         body: BlocBuilder<MyUserBloc, MyUserState>(builder: (context, state) {
@@ -32,10 +37,14 @@ class GenderScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "เพศ",
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .displayMedium
+                              ?.fontSize,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -64,10 +73,19 @@ class GenderScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child:
-                          CustomButton(text: "ดำเนินการต่อ", onPressed: () {}),
+                    CustomButton(
+                      text: "ดำเนินการต่อ",
+                      onPressed: () {
+                        context.read<MyUserBloc>().add(
+                              UpdateMyUser(
+                                myUser: state.myUser.copyWith(
+                                  gender:
+                                      temporaryGenderProvider.selectedGender,
+                                ),
+                              ),
+                            );
+                        Navigator.pushNamed(context, 'birthday');
+                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -77,9 +95,14 @@ class GenderScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, 'birthday');
                           },
-                          child: const Text(
+                          child: Text(
                             "ข้ามไปก่อน",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.fontSize,
+                                color: Colors.black),
                           )),
                     )
                   ],

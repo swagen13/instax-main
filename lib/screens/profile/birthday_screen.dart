@@ -31,10 +31,11 @@ class BirthDateScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 50),
-                const Text(
+                Text(
                   'วันเกิด',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize:
+                        Theme.of(context).textTheme.displaySmall?.fontSize,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -89,24 +90,31 @@ class BirthDateScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 15),
-                const Text(
+                Text(
                   "วันเกิดของคุณจะไม่ถูกแสดงในสาธารณะ เราจะแสดงแค่อายุของคุณสำหรับใช้ในการสมัครงานเท่านั้น",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                   ),
                 ),
                 const SizedBox(height: 30),
                 CustomButton(
                     onPressed: () {
-                      // create date format
-                      String date = _dateController.text;
-                      String month = _monthController.text;
-                      String year = _yearController.text;
-                      String birthDate = "$date/$month/$year";
-                      state.myUser.birthDate = birthDate;
-                      context.read<MyUserBloc>().add(UpdateMyUser(
-                            myUser: state.myUser,
-                          ));
+                      // formatting for birthdate to string
+                      final String birthDate = _yearController.text +
+                          "-" +
+                          _monthController.text +
+                          "-" +
+                          _dateController.text;
+
+                      // update user
+                      context.read<MyUserBloc>().add(
+                            UpdateMyUser(
+                              myUser: state.myUser.copyWith(
+                                birthDate: birthDate,
+                              ),
+                            ),
+                          );
+                      Navigator.pushNamed(context, 'name');
                     },
                     text: "ดำเนินการต่อ"),
                 const SizedBox(height: 20),
@@ -115,9 +123,14 @@ class BirthDateScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, 'name');
                       },
-                      child: const Text(
+                      child: Text(
                         "ข้ามไปก่อน",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.fontSize,
+                            color: Colors.black),
                       )),
                 )
               ],

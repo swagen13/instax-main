@@ -18,16 +18,16 @@ class TemporarySelectedJobsProvider extends ChangeNotifier {
 }
 
 class TemporarySelectedSubJobsProvider extends ChangeNotifier {
-  final List<SubJob> _selectedSubJobs = [];
+  final List<Job> _selectedSubJobs = [];
 
-  List<SubJob> get selectedSubJobs => _selectedSubJobs;
+  List<Job> get selectedSubJobs => _selectedSubJobs;
 
-  void addSelectedSubJob(SubJob subJob) {
+  void addSelectedSubJob(Job subJob) {
     _selectedSubJobs.add(subJob);
     notifyListeners();
   }
 
-  void removeSelectedSubJob(SubJob subJob) {
+  void removeSelectedSubJob(Job subJob) {
     _selectedSubJobs.remove(subJob);
     notifyListeners();
   }

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_repository/job_repository.dart';
-import 'package:job_repository/src/models/job.dart';
-import 'job_repo.dart';
+import 'package:job_repository/src/models/job.dart'; // Importing the Job model
 
 class FirebaseJobRepository implements JobRepository {
   final skillsCollection = FirebaseFirestore.instance.collection('skills');
@@ -9,11 +8,13 @@ class FirebaseJobRepository implements JobRepository {
       FirebaseFirestore.instance.collection('skillChildrens');
 
   @override
-  Future<List<Job>> getJob() {
+  Future<List<Job>> getJob() async {
     try {
-      return skillsCollection.get().then((value) => value.docs
-          .map((e) => Job.fromEntity(JobEntity.fromDocument(e.data())))
-          .toList());
+      final value = await skillsCollection.get();
+      print('value.docs : ${value.docs.length}');
+      return value.docs
+          .map((e) => Job.fromDocument(e))
+          .toList(); // Using Job model directly
     } catch (e) {
       print(e.toString());
       rethrow;
@@ -21,22 +22,13 @@ class FirebaseJobRepository implements JobRepository {
   }
 
   @override
-  Future<List<SubJob>> getSubjobByJobIds(List<String> jobIds) {
+  Future<List<Job>> getSubjobByJobIds(List<String> jobIds) async {
     try {
-      // loop for each jobIds
-      subskillsCollection
-          .where('parentId', whereIn: jobIds)
-          .get()
-          .then((value) {
-        value.docs.forEach((element) {
-          print('element.data() : ${element.data()}');
-        });
-      });
-      return subskillsCollection.where('parentId', whereIn: jobIds).get().then(
-          (value) => value.docs
-              .map(
-                  (e) => SubJob.fromEntity(SubJobEntity.fromDocument(e.data())))
-              .toList());
+      final value =
+          await subskillsCollection.where('parentId', whereIn: jobIds).get();
+      return value.docs
+          .map((e) => Job.fromDocument(e))
+          .toList(); // Using Job model directly
     } catch (e) {
       print(e.toString());
       rethrow;

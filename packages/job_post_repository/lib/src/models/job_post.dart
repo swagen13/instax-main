@@ -1,5 +1,3 @@
-import 'package:job_post_repository/src/entities/entities.dart';
-
 class JobPost {
   String id;
   String description1;
@@ -7,6 +5,7 @@ class JobPost {
   String subJob;
   String position;
   String wage;
+  bool isSelected;
 
   JobPost({
     required this.id,
@@ -15,28 +14,19 @@ class JobPost {
     required this.subJob,
     required this.position,
     required this.wage,
+    this.isSelected = false,
   });
 
-  JobPostEntity toEntity() {
-    return JobPostEntity(
-      id: id,
-      description1: description1,
-      description2: description2,
-      subJob: subJob,
-      position: position,
-      wage: wage,
-    );
-  }
-
-  static JobPost fromEntity(JobPostEntity entity) {
-    return JobPost(
-      id: entity.id,
-      description1: entity.description1,
-      description2: entity.description2,
-      subJob: entity.subJob,
-      position: entity.position,
-      wage: entity.wage,
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'description1': description1,
+      'description2': description2,
+      'subJob': subJob,
+      'position': position,
+      'wage': wage,
+      'isSelected': isSelected,
+    };
   }
 
   @override
@@ -48,6 +38,7 @@ class JobPost {
       subJob: $subJob
       position: $position
       wage: $wage
+      isSelected: $isSelected
     }''';
   }
 }
